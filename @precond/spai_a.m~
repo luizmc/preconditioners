@@ -1,0 +1,121 @@
+function ainv=spai_a(A,nmax,tol,innz)
+% Input:
+% A is the coefficient matrix.
+% NMAX is the optional parameter the specifies the max number of nonzero on
+% each column of ainv (optional). Its default value is NMAX=2.
+% TOL specifies the acceptable tolerance to ||ej-Amj||. The default value
+% is TOL=1E-6.
+% INNZ 
+
+n=length(A);
+
+% parameters
+if(nargin<2 || isempty(nmax))
+    nmax=2;
+end
+if(nargin<3 || isempty(tol))
+    tol=1E-6;           	% max value of ||ej - A*mj||
+end
+
+Mjnnz_max=n;              % max number of nonzero entries in Mj
+Mi=zeros(n*Mjnnz_max,1);  % row index of M
+Mj=Mi;                    % col index of M
+Ms=Mi;                    % values of M
+Mnnz=0;                   % total number of nonzero elements in M
+
+nrm_Aek=-ones(1,n);       % ||A*ek||
+jid=zeros(Mjnnz_max,1);
+iid=jid;
+for j = 1:n
+    ej=sparse(j,1,1,n,1);
+    
+    % set initial sparsity pattern
+    jid(1)=j;nj=1;
+    
+    [ss_A,ss_ej,~,~,inew]=precond.sparse_sparse(jid(nj),A,ej,[],[]);
+    ni=length(inew);
+    iid(1:ni)=inew;
+    
+    [Q,R]=qr(ss_A);
+    ss_mj=R\(Q'*ss_ej);
+    for i=1:nmax % improves the sparsity pattern
+        % calculates the error (full mode)
+        mj=sparse(jid(1:nj),ones(nj,1),ss_mj,n,1);
+        rj=ej-A*mj;
+        rj2=norm(rj)^2;
+        if(rj2<tol)
+            break;
+        end
+        
+        % updates the set jid and the vector Aek(full mode)
+        [jnew,nrm_Aek]=...
+            precond.jnew_adaptative(A,nrm_Aek,rj,rj2,innz,jid(1:nj));
+        
+        % update jid
+        jid((nj+1):(nj+length(jnew)))=jnew;
+        nj=nj+length(jnew);
+        
+        % adjusts A to the sparse-sparse mode
+        ss_A=A(:,jid(1:nj));
+        [inew,~]=find(A);
+        inew=unique(inew);
+        inew=setdiff(inew,iid(1:ni));%precond.setdiff(inew,sort(iid(1:ni)));
+        ss_A=ss_A([iid(1:ni);inew],:);
+        ss_ej=ej([iid(1:ni);inew]);
+        
+        % update iid
+        iid((ni+1):(ni+length(inew)))=inew; 
+        ni=ni+length(inew);
+        
+        % QR decomposition
+        %[Q,R]=qr_grote(Q,R,ss_A);
+        %[Q,R]=qr(ss_A);
+        
+        % solve the linear system
+        %ss_mj=R\(Q'*ss_ej);
+        ss_mj=ss_A\ss_ej; % Matlab solver
+    end
+    % updates the vectors of M
+    nj=length(ss_mj);
+    ind=Mnnz+1:Mnnz+nj;
+    Mi(ind)=jid(1:nj);
+    Mj(ind)=j;
+    Ms(ind)=ss_mj;
+    Mnnz=Mnnz+nj;
+end
+% assembles the sparse matrix M
+ind=1:Mnnz;
+M=sparse(Mi(ind),Mj(ind),Ms(ind),n,n);
+
+% set ainv
+ainv.nnz=nnz(M);
+ainv.apply=inline('M*x','M','x');
+ainv.apply=@(x)ainv.apply(M,x);
+ainv.M=M;
+end
+
+function [Q,R] = qr_grote(Q,R,A)
+[nrow,ncol]=size(A);
+[~,mold]=size(R);
+[nold,~]=size(Q);
+nnew=nrow-nold;
+
+
+% adjusts the indices
+iold=1:nold;
+jnew=(mold+1):ncol;
+inew=(nold+1):nrow;
+
+Iold=speye(nnew);
+Inew=speye(mold);
+
+% updates the QR decomposition
+B=Q'*A(iold,jnew);
+B1=B(1:mold,:);
+B2=[B(mold+1:end,:);A(inew,jnew)];
+[Qnew,Rnew]=qr(B2);
+
+Q=blkdiag(Q,Iold)*blkdiag(Inew,Qnew);
+[nrow,~]=size(Rnew);
+R=[R(1:mold,:),B1;zeros(nrow,mold),Rnew];
+end
