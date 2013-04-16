@@ -1,0 +1,3 @@
+"Finding a good preconditioner to solve a given sparse linear system is often viewed as a combination of art and science" (Yousef Saad 200)
+
+The goal of this project is the development of preconditioners to solve sparse linear system. 
