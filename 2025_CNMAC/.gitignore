@@ -1,0 +1,33 @@
+# Arquivos auxiliares do LaTeX
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.brf
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# Arquivos temporários de backup
+*.bak
+*.sav
+*.backup
+*.tmp
+
+# Arquivos do editor LaTeX
+*.synctex
+*.synctex(busy)
+
+# Configuração específica do LaTeX Workshop
+*.gz
+*.run.xml
+
+
