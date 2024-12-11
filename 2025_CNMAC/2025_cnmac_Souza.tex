@@ -1,0 +1,303 @@
+\documentclass{pssbmac}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% POR FAVOR, NÃO FAÇA MUDANÇAS NESSE PADRÃO QUE ACARRETEM  EM
+%% ALTERAÇÃO NA FORMATAÇÃO FINAL DO TEXTO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% POR FAVOR, ESCOLHA CONFORME O CASO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[brazil]{babel} % texto em Português
+%\usepackage[english]{babel} % texto em Inglês
+
+%\usepackage[latin1]{inputenc} % acentuação em Português ISO-8859-1
+\usepackage[utf8]{inputenc} % acentuação em Português UTF-8
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% POR FAVOR, NÃO ALTERAR
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[T1]{fontenc}
+\usepackage{float}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{indentfirst}
+\usepackage{amsmath, amsfonts, amssymb, amsthm, mathtools}
+\usepackage{url}
+\usepackage{csquotes}
+% Ambientes pré-definidos
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{lema}{Lema}[section]
+\newtheorem{prop}{Proposi\c{c}\~ao}[section]
+\newtheorem{defi}{Defini\c{c}\~ao}[section]
+\newtheorem{obs}{Observa\c{c}\~ao}[section]
+\newtheorem{cor}{Corol\'ario}[section]
+
+% ref bibliográficas
+\usepackage[backend=biber, style=numeric-comp%, maxnames=50
+]{biblatex}
+\addbibresource{refs.bib}
+\DeclareTextFontCommand{\emph}{\boldmath\bfseries}
+\DefineBibliographyStrings{brazil}{phdthesis = {Tese de doutorado}}
+\DefineBibliographyStrings{brazil}{mathesis = {Disserta\c{c}\~{a}o de mestrado}}
+\DefineBibliographyStrings{english}{mathesis = {Master dissertation}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+{}{\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TÍTULO E AUTORAS(ES)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\title{Uma comparação entre métodos baseados em images ou parâmetros escalares para a seleção de precondicionadores}
+
+\author{
+    {\large Michael Souza}\thanks{michael@ufc.br}, {\small UFC, Fortaleza, CE},  {\large Luiz Mariano Carvalho}\thanks{luizmc@ime.uerj.br}, {\small  UERJ, Rio de Janeiro, RJ}, \\
+    {\large Douglas Augusto}\thanks{daa@fiocruz.br}, {\small FOC, Rio de Janeiro, RJ }, {\large Jairo Panetta}\thanks{jairo.panetta@gmail.com}, {\small ITA, São José dos Campos, SP}, \\
+    {\large Paulo Goldfeld}\thanks{goldfeld@matematica.ufrj.br}, {\small UFRJ, Rio de Janeiro, RJ}, {\large José R. P. Rodrigues}\thanks{jrprodrigues@petrobras.com.br}, {\small CENPES/Petrobras, Rio de Janeiro, RJ} \\
+}
+}
+\criartitulo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TEXTO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{abstract}
+{\bf Resumo}. Em computação de alto desempenho (HPC), a solução eficiente de grandes sistemas lineares esparsos é fundamental, 
+sendo os métodos iterativos a escolha predominante. No entanto, o desempenho desses métodos está ligado ao precondicionador
+ escolhido. A natureza multifacetada das matrizes esparsas
+torna difícil a prescrição universal de precondicionadores. Avançando em metodologias anteriores, esta pesquisa apresenta a representação da esparsidade de uma matrizes
+ por meio de imagens RGB. Utilizando uma rede neural convolucional
+(CNN), a tarefa de seleção do precondicionador se transforma em um problema de classificação
+multi-classe. Testes extensivos em 126 matrizes da coleção SuiteSparse enfatizam a
+adequação do modelo CNN, observando um aumento de 32\% na acurácia e uma redução de 25\%
+no tempo computacional.
+
+\noindent
+{\bf Palavras-chave}. computação de alto desempenho (HPC), sistemas lineares esparsos,  métodos iterativos, escolha de precondicionadores,
+ rede neural convolucional, classificação multi-classe
+\end{abstract}
+
+\section{Introdução}\label{sec:intro}
+
+As simulações numéricas em, por exemplo, engenharia de reservatórios exigem 
+a solução de grandes sistemas lineares com matrizes esparsas, ocupando em muitos casos mais de 50\% 
+do tempo de computação 
+\cite{gasparini21HybridParallelIterativeSparseLinearSolverFramework,gaganis2012machine}. 
+Os métodos de Krylov são os solvers lineares preferidos nesse contexto. 
+No entanto, seu sucesso depende da escolha de um precondicionador adequado, 
+o que ainda é uma tarefa desafiadora, 
+geralmente baseada em tentativa e erro ou na experiência do usuário 
+\cite{saad2003iterative,scott2023introduction}.
+
+Um precondicionador é uma matriz ou operador que modifica o sistema original 
+para acelerar a convergência de solvers lineares iterativos. Vários fatores influenciam a 
+eficácia do precondicionador, incluindo, entre outros, as diversas propriedades - estruturais ou matemáticas - da matriz esparsa,
+a arquitetura computacional, as estruturas de dados empregadas 
+\cite{benzi2002preconditioning,bell2008efficient}. 
+Neste trabalho, abordaremos apenas o primeiro desses fatores.
+
+Propor uma representação adequada para matrizes esparsas quando da sugestão de 
+precondicionadores é um desafio, principalmente devido aos requisitos de escalabilidade. 
+Para sistemas esparsos grandes, o ideal é que a complexidade computacional seja linear 
+em relação ao número de elementos não nulos. Essa restrição decorre da necessidade de 
+manter a eficiência à medida que o tamanho do sistema aumenta, o que é comum em, por exemplo, 
+simulações de reservatórios ou em dinâmica de fluidos computacional. 
+A dificuldade em obter representações compactas está em capturar as propriedades 
+da matriz que mais influenciam o desempenho dos precondicionadores dentro 
+dessa restrição de complexidade linear.
+
+Entre os atributos da matriz que influenciam a escolha dos precondicionadores, 
+podemos destacar a ordem da matriz, seus autovalores e valores singulares, 
+o número de condicionamento, o padrão de esparsidade, a densidade e a dominância diagonal, 
+entre outros.  Com a exceção do padrão de esparsidade, esses atributos são numéricos. A esparsidade
+encapsula atributos topológicos sobre a conexão entre os elementos não nulos da matriz. 
+Embora alguns atributos escalares, como a largura de banda e o número de elementos diferentes 
+de zero, forneçam informações sobre padrões complexos de esparsidade, 
+sua sensibilidade é baixa. Essa característica dificulta a obtenção de 
+uma representação numérica adequada para a esparsidade. 
+
+Embora não seja o único fator determinante, o padrão de esparsidade afeta o 
+nível de paralelismo possível tanto na aplicação quanto na construção de precondicionadores 
+como ILU($k$) \cite{Meijerink1977AnIS, saad2003iterative}. No método multigrid algébrico (AMG),
+os operadores grosseiros codificam a esparsidade e os valores numéricos para criar 
+uma aproximação multinível do sistema \cite{stuben2001AReview}. Dependendo do padrão 
+de esparsidade, até mesmo métodos diretos podem ser aplicáveis para resolver 
+problemas esparsos \cite{Davis2016ASO}.
+
+Neste trablho, exploramos técnicas de aprendizagem profunda (DL) para obter 
+automaticamente representações compactas de matrizes esparsas para selecionar 
+precondicionadores. Ampliando a abordagem de Yamada et al. \cite{yamada2018preconditioner}, 
+usamos imagens RGB para codificar espacialmente os padrões de esparsidade, 
+facilitando a análise orientada por dados para aumentar a eficiência dos solvers lineares. 
+Diferentemente do trabalho de Yamada, nossa metodologia incorpora a classificação 
+de vários rótulos para identificar uma gama de precondicionadores adequados 
+para uma determinada matriz esparsa. Para processar as representações baseadas 
+em imagens, empregamos uma rede neural convolucional (CNN) \cite{li2022survey}.
+
+Nossas contribuições são as seguintes: 
+ \begin{description}  
+\item [Modelo multi-rótulo:] Em tarefas de classificação convencionais, 
+uma matriz esparsa é frequentemente mapeada para apenas um precondicionador. 
+Entretanto, em nosso conjunto de dados, aproximadamente 20\% das matrizes exibem 
+vários precondicionadores ideais. Com base na pesquisa de Yamada et al.
+\cite{yamada2018preconditioner}, nós não seguimos a abordagem de mapeamento de um para um. 
+Ao adotar uma estrutura com vários rótulos, permitimos atribuir vários precondicionadores 
+a uma única matriz, lidando melhor com casos em que vários precondicionadores têm desempenho 
+semelhante.  
+\item [Modelos escalares versus modelos baseados em imagens:] Comparamos modelos escalares 
+e com alguns baseados em imagens. Nossa pesquisa também introduziu um modelo misto que combina 
+os dois atributos, transformando os atributos baseados em imagem em um formato 
+vetorial (\emph{achatamento}) e, posteriormente, integrando-os à tabela de atributos escalares.  
+\item[Resultados promissores:] Em nossa pesquisa inicial, os modelos baseados em imagens 
+superam os modelos baseados em escalas na seleção do precondicionador. Eles mostram 
+uma probabilidade 32\% maior de sugestão de precondicionador ideal e uma chance 26\% maior 
+de baixo impacto computacional quando não se escolhe o precondicionador ideal. Esses 
+resultados destacam a eficiência e a eficácia superiores dos modelos baseados em imagens.  
+\end{description}
+
+O restante deste artigo está assim estruturado: a Seção \ref{sec:related} 
+analisa a literatura relevante, a Seção \ref{sec:method} descreve nossa metodologia, 
+a Seção \ref{sec:results} discute os resultados empíricos e a Seção \ref{sec:conclusions} 
+conclui o artigo, destacando sua importância e sugerindo futuras direções de pesquisa.
+
+\section{Trabalhos relacionados}\label{sec:related}
+
+O potencial da aprendizagem profunda (DL) para discernir padrões complexos e 
+facilitar a tomada de decisões orientada por dados foi reconhecido 
+como uma solução eficaz para vários desafios na computação de alto desempenho 
+aplicada à solução de sistemas lineares \cite{falch2017machine,tuncer2017diagnosing,memeti2019using}.
+
+Uma área de aplicação da DL é a seleção automática da estrutura de dados 
+para o armazenamento de matrizes esparsas. Sedaghati et al. \cite{sedaghati2015automatic}
+usaram algoritmos de árvore de decisão para automatizar a seleção do formato de 
+armazenamento com base nas propriedades da matriz. Nisa et al. \cite{nisa2018effective} 
+aplicaram técnicas de aprendizado de máquina para prever os formatos de 
+armazenamento mais adequados para GPUs. A importância de sincronizar a estrutura de dados 
+de armazenamento com a eficiência computacional também é destacada na pesquisa de 
+Barreda et al. \cite{barreda2020performance} e Cui et al. \cite{cui2016code} 
+que exploram melhorias de desempenho em diferentes plataformas de computação.
+
+Outra aplicação de DL notável envolve (\emph{autoajuste}) de solvers lineares. 
+Por exemplo, Peairs e Chen \cite{peairs2011using} utilizaram uma estratégia de 
+aprendizagem por reforço para determinar os parâmetros de reinício ideais para o 
+GMRES. Bhowmick et al. \cite{bhowmick2006application} aplicaram a DL para selecionar 
+os melhores solvers para sistemas lineares esparsos em tempo de execução, 
+adaptando-se aos dados e à arquitetura computacional disponível. 
+Dufrechou et al. \cite{dufrechou2019automatic} empregaram técnicas de DL 
+para prever o solver ideal para um sistema linear específico, concentrando-se 
+em situações em que um número limitado de sistemas triangulares é resolvido para a 
+mesma matriz. 
+Em outra abordagem, Funk et al. \cite{funk2022prediction} apresentaram uma técnica de 
+aprendizagem profunda para identificar o solver iterativo ideal para 
+um determinado sistema linear esparso, obtendo uma acurácia de classificação de 60\%.
+
+Uma tendência crescente na DL é o uso de redes neurais para acelerar os 
+operações de álgebra linear. Cui et al. \cite{cui2016code} empregaram um sistema de 
+DL para prever a melhor implementação da multiplicação matriz-vetor (SpMV) para uma 
+determinada matriz. G{\"o}tz e Anzt \cite{gotz2018machine} introduziram 
+uma rede neural convolucional (CNN) para detectar estruturas de blocos em 
+padrões de esparsidade de matriz. Em uma abordagem diferente, 
+Ackmann et al. \cite{ackmann2020machine} propuseram o uso de uma 
+rede neural feed-forward como precondicionador. Taghibakhshi et al. 
+\cite{taghibakhshi2021optimization} introduziram um método inovador usando 
+um agente de aprendizagem por reforço baseado em redes neurais de grafos (GNNs) 
+para construir espaços grosseiros em uma abordagem multigrid. 
+
+Embora a DL tenha otimizado substancialmente vários aspectos da álgebra linear computacional,
+seu potencial na seleção de precondicionadores merece ser mais explorado. 
+Este trabalho é uma contribuição nessa direção.
+
+\section{Metodologia}\label{sec:method}
+\section{Resultados}\label{sec:results}
+\section{Conclusões}\label{sec:conclusions}
+
+
+
+Equações inseridas no trabalho completo devem ser enumeradas sequencialmente e à direita no texto, por exemplo
+\begin{equation}
+\frac{\partial u}{\partial t}-\Delta u = f, \quad  \mathrm{em} \; \Omega. \label{Calor}
+\end{equation}
+Consulte o arquivo \verb!.tex! para mais detalhes sobre o código-fonte gerador da equação \eqref{Calor}.
+
+\section{Tabelas e Figuras}
+
+As(os) autoras(es) podem inserir figuras e tabelas no artigo. Elas devem estar dispostas próximas de suas referências no texto.
+
+\subsection{Inserção de Tabelas}
+
+A inserção de tabela deve ser feita com o ambiente \verb!table!, sendo enumerada, disposta horizontalmente centralizada, próxima de sua referência no texto, e a legenda imediatamente acima dela. Por exemplo, consulte a Tabela \ref{tabela01}.
+
+\begin{table}[H]
+\caption{ {\small Categorias dos trabalhos.}}
+\centering
+\begin{tabular}{ccc}
+\hline
+Categoria do trabalho  & Número de páginas & Tipo do trabalho\\ \hline
+1          & 2  & $A$, $B$ e $C$    \\
+2          & entre 5 e 7  & apenas $C$ \\
+\hline
+\end{tabular}\label{tabela01}
+\end{table}
+
+\subsection{Inserção de Figuras}
+
+A inserção de figura deve ser feita com o ambiente \verb!figure!, ela deve estar enumerada, disposta horizontalmente centralizada, próxima de sua referência no texto, e legenda imediatamente abaixo dela. \emph{Quando não própria, deve-se indicar/referências a fonte.} Por exemplo, consulte a Figura \ref{figura01}.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=.7\textwidth]{ex_fig}
+\caption{ {\small Exemplo de imagem. Fonte: indicar.}}
+\label{figura01}
+\end{figure}
+
+\section{Sobre as Referências Bibliográficas}
+
+As referências bibliográficas devem ser inseridas conforme especificado neste padrão, 
+sendo que serão automaticamente geradas em ordem alfabética pelo sobrenome do primeiro autor. 
+Este {\it template} fornece suporte para a inserção de referências bibliográficas com o Bib\LaTeX{}. 
+Os dados de cada referência do trabalho devem ser adicionados no arquivo \verb+refs.bib+ e a
+ indicação da referência no texto deve ser inserida com o comando \verb+\cite+. 
+ Seguem alguns exemplos de referências: livro \cite{Boldrini}, artigos publicados em periódicos 
+ \cite{Contiero,Cuminato}, capítulo de livro \cite{daSilva}, dissertação de mestrado \cite{Diniz}, 
+ tese de doutorado \cite{Mallet}, livro publicado dentro de uma série \cite{Gomes}, 
+ trabalho publicado em anais de eventos \cite{Santos}, {\it website} e outros \cite{CNMAC}. 
+ Por padrão, os nomes de todos os autores da obra citada aparecem na bibliografia. 
+ Para obras com mais de três autores, é também possível indicar apenas o nome do primeiro autor, 
+ seguido da expressão et al. Para implementar essa alternativa, basta remover ``\verb+,maxnames=50+'' 
+ do comando correspondente do código-fonte. Sempre que disponível forneça o DOI, ISBN ou ISSN, conforme o caso.
+
+\section{Considerações Finais}
+
+Esta seção é reservada às principais conclusões e considerações finais do trabalho.
+
+\section*{Agradecimentos (opcional)}
+
+Seção reservada aos agradecimentos dos autores, caso for pertinente. Por exemplo, agradecimento a fomentos. Se os autores optarem pela inclusão de Agradecimentos, a palavra ``(opcional)'' deve ser removida do título da seção. Esta seção não é numerada e deve ser disposta entre a última seção do corpo do texto e as Referências.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFS BIBLIOGRÁFICAS
+% POR FAVOR, NÃO ALTERAR
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\printbibliography
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
+
+
+
+
