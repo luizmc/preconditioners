@@ -1,3 +1,526 @@
+
+@article{balaprakash2018autotuning,
+  title={Autotuning in high-performance computing applications},
+  author={Balaprakash, Prasanna and Dongarra, Jack and Gamblin, Todd and Hall, Mary and Hollingsworth, Jeffrey K and Norris, Boyana and Vuduc, Richard},
+  journal={Proceedings of the IEEE},
+  volume={106},
+  number={11},
+  pages={2068--2083},
+  year={2018},
+  publisher={IEEE},
+  doi={10.1109/JPROC.2018.2841200}
+}
+
+@article{bauer2015quiet,
+  author        = {Bauer, Peter and Thorpe, Alan and Brunet, Gilbert},
+  title         = {The quiet revolution of numerical weather prediction},
+  journal       = {Nature},
+  year          = {2015},
+  volume        = {525},
+  number        = {7567},
+  pages         = {47--55},
+  month         = sep,
+  issn          = {1476-4687},
+  abstract      = {Advances in numerical weather prediction represent a quiet revolution because they have resulted from a steady accumulation of scientific knowledge and technological advances over many years that, with only a few exceptions, have not been associated with the aura of fundamental physics breakthroughs. Nonetheless, the impact of numerical weather prediction is among the greatest of any area of physical science. As a computational problem, global weather prediction is comparable to the simulation of the human brain and of the evolution of the early Universe, and it is performed every day at major operational centres across the world.},
+  url= {10.1038/nature14956},
+}
+
+@article{li2022survey,
+  title={A survey of convolutional neural networks: analysis, applications, and prospects},
+  author={Li, Zewen and Liu, Fan and Yang, Wenjie and Peng, Shouheng and Zhou, Jun},
+  journal={IEEE Transactions on neural networks and learning systems},
+  year={2022},
+  volume={33},
+  number={12},
+  pages={6999-7019},
+  doi={10.1109/TNNLS.2021.3084827},
+  abstract={A convolutional neural network (CNN) is one of the most significant networks in the deep learning field. Since CNN made impressive achievements in many areas, including but not limited to computer vision and natural language processing, it attracted much attention from both industry and academia in the past few years. The existing reviews mainly focus on CNN’s applications in different scenarios without considering CNN from a general perspective, and some novel ideas proposed recently are not covered. In this review, we aim to provide some novel ideas and prospects in this fast-growing field. Besides, not only 2-D convolution but also 1-D and multidimensional ones are involved. First, this review introduces the history of CNN. Second, we provide an overview of various convolutions. Third, some classic and advanced CNN models are introduced; especially those key points making them reach state-of-the-art results. Fourth, through experimental analysis, we draw some conclusions and provide several rules of thumb for functions and hyperparameter selection. Fifth, the applications of 1-D, 2-D, and multidimensional convolution are covered. Finally, some open issues and promising directions for CNN are discussed as guidelines for future work.}
+}
+
+@book{saad2003iterative,
+  title={Iterative methods for sparse linear systems},
+  author={Saad, Yousef},
+  year={2003},
+  publisher={SIAM}
+}
+
+@inproceedings{cui2016code,
+  title={A code selection mechanism using deep learning},
+  author={Cui, Hang and Hirasawa, Shoichi and Takizawa, Hiroyuki and Kobayashi, Hiroaki},
+  booktitle={2016 IEEE 10th International Symposium on Embedded Multicore/Many-core Systems-on-Chip (MCSOC)},
+  pages={385--392},
+  year={2016},
+  organization={IEEE},
+  doi={10.1109/MCSoC.2016.46},
+  abstract={Sparse Matrix-Vector multiplication (SpMV) is a computational kernel widely used in many applications. There are many different implementations using different processors and algorithms for SpMV. The performances of different SpMV implementations are quite different, and it is basically difficult to choose the implementation that has the best performance for a given sparse matrix and a given platform without performance profiling. This work presents a prototype implementation of an effective machine learning system for SpMV code selection best suited for a given matrix. Instead of using predefined features of a matrix for performance prediction, a feature image and a deep learning network are used to map each sparse matrix to the implementation that has the best performance in advance of the execution. The performance gain by the mechanism is evaluated by using a machine learning method for predicting the best SpMV implementation. According to our evaluation, the proposed mechanism can select an optimal or suboptimal implementation in most cases, though the prediction is not perfect. These results demonstrate the feasibility that the proposed machine learning approach can capture underlying features of an input sparse matrix useful for SpMV code selection.}
+}
+
+@misc{ssgetpy,
+  author = {Raghunathan, Sudarshan},
+  title = {SSGETPY: Search and download sparse matrices from the SuiteSparse Matrix Collection},
+  year = {2023},
+  url = {https://github.com/drdarshan/ssgetpy},
+  note = {GitHub repository},
+  urldate = {2023-10-20T10:45:13},
+}
+
+@misc{matlab,
+  title = {{MATLAB}},
+  author = {MathWorks},
+  note = {Version 9.14.0.2254940 (R2023a)},
+  year = {2023}
+}
+
+@article{kolodziej2019suitesparse,
+  title={The SuiteSparse Matrix Collection Website Interface},
+  author={Kolodziej, Scott P. and Aznaveh, Mohsen and Bullock, Matthew and David, Jarrett and Davis, Timothy A. and Henderson, Matthew and Hu, Yifan and Sandstrom, Read},
+  journal={Journal of Open Source Software},
+  volume={4},
+  number={35},
+  pages={1244},
+  doi={10.21105/joss.01244},
+  year={2019}
+}
+
+@misc{chollet2015keras,
+  author={Chollet, Fran\c{c}ois and others},
+  title = {Keras},
+  url = {https://keras.io},
+  urldate = {2023-09-01T11:27:26},
+  year = {2015}
+}
+
+@misc{tensorflow2015-whitepaper,
+  author = {    Mart\'{i}n~Abadi and
+    Ashish~Agarwal and
+    Paul~Barham and
+    Eugene~Brevdo and
+    Zhifeng~Chen and
+    Craig~Citro and
+    Greg~S.~Corrado and
+    Andy~Davis and
+    Jeffrey~Dean and
+    Matthieu~Devin and
+    Sanjay~Ghemawat and
+    Ian~Goodfellow and
+    Andrew~Harp and
+    Geoffrey~Irving and
+    Michael~Isard and
+    Yangqing Jia and
+    Rafal~Jozefowicz and
+    Lukasz~Kaiser and
+    Manjunath~Kudlur and
+    Josh~Levenberg and
+    Dandelion~Man\'{e} and
+    Rajat~Monga and
+    Sherry~Moore and
+    Derek~Murray and
+    Chris~Olah and
+    Mike~Schuster and
+    Jonathon~Shlens and
+    Benoit~Steiner and
+    Ilya~Sutskever and
+    Kunal~Talwar and
+    Paul~Tucker and
+    Vincent~Vanhoucke and
+    Vijay~Vasudevan and
+    Fernanda~Vi\'{e}gas and
+    Oriol~Vinyals and
+    Pete~Warden and
+    Martin~Wattenberg and
+    Martin~Wicke and
+    Yuan~Yu and
+    Xiaoqiang~Zheng},
+  title = {{TensorFlow}: Large-Scale Machine Learning on Heterogeneous Systems},
+  url = {https://www.tensorflow.org/},
+  urldate = {2023-09-01T10:34:13},
+  note={Software available from tensorflow.org},
+  year = {2015}
+}
+
+@article{scikit-learn,
+  author  = {Fabian Pedregosa and Ga{{\"e}}l Varoquaux and Alexandre Gramfort and Vincent Michel and Bertrand Thirion and Olivier Grisel and Mathieu Blondel and Peter Prettenhofer and Ron Weiss and Vincent Dubourg and Jake Vanderplas and Alexandre Passos and David Cournapeau and Matthieu Brucher and Matthieu Perrot and {{\'E}}douard Duchesnay},
+  title   = {Scikit-learn: Machine Learning in Python},
+  journal = {Journal of Machine Learning Research},
+  year    = {2011},
+  volume  = {12},
+  number  = {85},
+  pages   = {2825--2830},
+  url     = {http://jmlr.org/papers/v12/pedregosa11a.html}
+}
+
+
+
+@misc{ackmann2020machine,
+      title={Machine-Learned Preconditioners for Linear Solvers in Geophysical Fluid Flows}, 
+      author={Jan Ackmann and Peter D. Düben and Tim N. Palmer and Piotr K. Smolarkiewicz},
+      year={2020},
+      eprint={2010.02866},
+      archivePrefix={arXiv},
+      primaryClass={physics.ao-ph},
+      abstract={It is tested whether machine learning methods can be used for preconditioning to increase the performance of the linear solver -- the backbone of the semi-implicit, grid-point model approach for weather and climate models. Embedding the machine-learning method within the framework of a linear solver circumvents potential robustness issues that machine learning approaches are often criticized for, as the linear solver ensures that a sufficient, pre-set level of accuracy is reached. The approach does not require prior availability of a conventional preconditioner and is highly flexible regarding complexity and machine learning design choices. Several machine learning methods are used to learn the optimal preconditioner for a shallow-water model with semi-implicit timestepping that is conceptually similar to more complex atmosphere models. The machine-learning preconditioner is competitive with a conventional preconditioner and provides good results even if it is used outside of the dynamical range of the training dataset. },
+}
+@article{barreda2020performance,
+  title={Performance modeling of the sparse matrix--vector product via convolutional neural networks},
+  author={Barreda, Maria and Dolz, Manuel F and Casta{\~n}o, M Asunci{\'o}n and Alonso-Jord{\'a}, Pedro and Quintana-Orti, Enrique S},
+  journal={The Journal of Supercomputing},
+  volume={76},
+  pages={8883--8900},
+  number = {11},
+  year={2020},
+  publisher={Springer},
+  url= {doi.org/10.1007/s11227-020-03186-1},
+  abstract = {Modeling the execution time of the sparse matrix–vector multiplication (SpMV) on a current CPU architecture is especially complex due to (i) irregular memory accesses; (ii) indirect memory referencing; and (iii) low arithmetic intensity. While analytical models may yield accurate estimates for the total number of cache hits/misses, they often fail to predict accurately the total execution time. In this paper, we depart from the analytic approach to instead leverage convolutional neural networks (CNNs) in order to provide an effective estimation of the performance of the SpMV operation. For this purpose, we present a high-level abstraction of the sparsity pattern of the problem matrix and propose a blockwise strategy to feed the CNN models by blocks of nonzero elements. The experimental evaluation on a representative subset of the matrices from the SuiteSparse Matrix collection demonstrates the robustness of the CNN models for predicting the SpMV performance on an Intel Haswell core. Furthermore, we show how to generalize the network models to other target architectures to estimate the performance of SpMV on an ARM A57 core.}
+}
+
+
+@inproceedings{gotz2018machine,
+  title={Machine learning-aided numerical linear algebra: Convolutional neural networks for the efficient preconditioner generation},
+  author={G{\"o}tz, Markus and Anzt, Hartwig},
+  booktitle={2018 IEEE/ACM 9th Workshop on Latest Advances in Scalable Algorithms for Large-Scale Systems (scalA)},
+  doi = {10.1109/ScalA.2018.00010},
+  url = {https://doi.ieeecomputersociety.org/10.1109/ScalA.2018.00010},
+  pages={49--56},
+  year={2018},
+  organization={IEEE},
+  abstract={Generating sparsity patterns for effective block-Jacobi preconditioners is a challenging and computationally expensive task, in particular for problems with unknown origin. In this paper we design a convolutional neural network (CNN) to detect natural block structures in matrix sparsity patterns. For test matrices where a natural block structure is complemented with a random distribution of nonzeros (noise), we show that a trained network succeeds in identifying strongly connected components with more than 95\% prediction accuracy, and the resulting block-Jacobi preconditioner effectively accelerating an iterative GMRES solver. Segmenting a matrix into diagonal tiles of size 128x128, for each tile the sparsity pattern of an effective block-Jacobi preconditioner can be generated in less than a millisecond when using a production-line GPU.}
+}
+
+@inproceedings{nisa2018effective,
+  title={Effective machine learning based format selection and performance modeling for SpMV on GPUs},
+  author={Nisa, Israt and Siegel, Charles and Rajam, Aravind Sukumaran and Vishnu, Abhinav and Sadayappan, P},
+  booktitle={2018 IEEE International Parallel and Distributed Processing Symposium Workshops (IPDPSW)},
+  pages={1056--1065},
+  year={2018},
+  doi={10.1109/IPDPSW.2018.00164},
+  organization={IEEE},
+  TLDR={By identifying a small set of sparse matrix features to use in training the ML models, it is demonstrated that efficient prediction of the best format with 88% accuracy can be achieved when selecting between six well known sparse-matrix formats on two GPU architectures (NVIDIA Pascal and Kepler), and 10% relative mean error with execution time prediction.},
+  abstract={Sparse Matrix-Vector multiplication (SpMV) is a key kernel for many applications in computational science and data analytics. Several efforts have addressed the optimization of SpMV on GPUs, and a number of compact sparse-matrix representations have been considered for it. It has been observed that the sparsity pattern of non-zero elements in a sparse matrix has a significant impact on achieving SpMV performance. Further, no single sparse-matrix format is consistently the best across the range of sparse matrices encountered in practice. In this paper, we perform a comprehensive study that explores the use of Machine Learning to answer two questions: 1) Given an unseen sparse matrix, can we effectively predict the best format for SpMV on GPUs? 2) Can SpMV execution time for that matrix be predicted, for different matrix formats? By identifying a small set of sparse matrix features to use in training the ML models, we demonstrate that efficient prediction of the best format with $\approx$ 88\% accuracy can be achieved when selecting between six well known sparse-matrix formats on two GPU architectures (NVIDIA Pascal and Kepler), and $\approx$ 10\% relative mean error (RME) with execution time prediction.
+  }
+}
+
+@article{peairs2011using,
+  title={Using reinforcement learning to vary the m in GMRES (m)},
+  author={Peairs, Lisa and Chen, Tzu-Yi},
+  journal={Procedia Computer Science},
+  volume={4},
+  pages={2257--2266},
+  year={2011},
+  doi = {10.1016/j.procs.2011.04.246},
+  publisher={Elsevier},
+  abstract={While the original GMRES(m) iterative solver assumes the restart parameter m stays ﬁxed throughout the solve, in practic varying m can improve the convergence behavior of the solver. Previous work tried to take advantage of this fact by choosing the restart value at random for each outer iteration or by adaptively changing the restart value based on a measure of the progress made towards computing the solution in successive iterations. In this work a novel application of reinforcement learning to the problem of adaptively choosing values of m is described and then compared to the two existing strategies on matrices from a range of application areas.}
+}
+
+@misc{bhowmick2006application,
+   author = {Bhowmick, Sanjukta and Eijkhout, Victor and Freund, Yoav and Fuentes, Erika and Keyes, David},
+  title  = {Application of Machine Learning in Selecting Sparse Linear Solvers},
+  year   = {2006},
+  abstract={Many fundamental and resource-intensive tasks in scientific computing, such as solving linear systems, can be approached through multiple algorithms. Using an algorithm well adapted to characteristics of the task can significantly enhance the performance by reducing resource utilization without compromising the quality of the result. Given the numerous parameters governing resource trade-offs, algorithmic choices can explode combinatorially. Even for the same simulation, the “best” solution method can vary across architectures and input data, thereby making the selection a very challenging problem. In this paper, we demonstrate how machine learning techniques can be used in selecting solvers for sparse linear systems and in adapting them to runtime-dependent features of the data and the architecture. This process includes processing information in the dataset, identification of relevant features, and specifying selection criteria for algorithmic choices. Our future research projects include more ambitious plans for machine learning; this paper is but an initial demonstration of their applicability.}
+}
+
+
+@inproceedings{dufrechou2019automatic,
+  title={Automatic selection of sparse triangular linear system solvers on GPUs through machine learning techniques},
+  author={Dufrechou, Ernesto and Ezzatti, Pablo and Quintana-Ort{\'\i}, Enrique S.},
+  booktitle={2019 31st International Symposium on Computer Architecture and High Performance Computing (SBAC-PAD)},
+  pages={41--47},
+  year={2019},
+  organization={IEEE},
+  doi={10.1109/SBAC-PAD.2019.00020},
+  abstract={The solution of sparse triangular linear systems is often the most time-consuming stage of preconditioned iterative methods to solve general sparse linear systems, where it has to be applied several times for the same sparse matrix. For this reason, its computational performance has a strong impact on a wide range of scientific and engineering applications, which has motivated the study of its efficient execution on massively parallel platforms. In this sense, several methods have been proposed to tackle this operation on graphics processing units (GPUs), which can be classified under either the level-set or the self-scheduling paradigms. The results obtained from the experimental evaluation of the different methods suggest that both paradigms perform well for certain problems but poorly for others. Additionally, the relation between the properties of the linear systems and the performance of the different solvers is not evident a-priori. In this context, techniques that allow to predict inexpensively which is be the best solver for a particular linear system can lead to important runtime reductions. Our approach leverages machine learning techniques to select the best sparse triangular solver for a given linear system, with focus on the case where a small number of triangular systems has to be solved for the same matrix. We study the performance of several methods using different features derived from the sparse matrices, obtaining models with more than 80\% of accuracy and acceptable prediction speed. These results are an important advance towards the automatic selection of the best GPU solver for a given sparse triangular linear system, and the characterization of the performance of these kernels.}
+}
+
+@inproceedings{funk2022prediction,
+  title={Prediction of optimal solvers for sparse linear systems using deep learning},
+  author={Funk, Yannick and G{\"o}tz, Markus and Anzt, Hartwig},
+  booktitle={Proceedings of the 2022 SIAM Conference on Parallel Processing for Scientific Computing},
+  pages={14--24},
+  year={2022},
+  organization={SIAM},
+  doi = {10.1137/1.9781611977141.2},
+  abstract={Solving sparse linear systems is a key task in a number of computational problems, such as data analysis and simulations, and majorly determines overall execution time. Choosing a suitable iterative solver algorithm, however, can significantly improve time-to-completion. We present a deep learning approach designed to predict the optimal iterative solver for a given sparse linear problem. For this, we detail useful linear system features to drive the prediction process, the metrics we use to quantify the iterative solvers' time-to-approximation performance and a comprehensive experimental evaluation of the prediction quality of the neural network. Using a hyperparameter optimization and an ablation study on the SuiteSparse matrix collection we have inferred the importance of distinct features, achieving a top-1 classification accuracy of 60\%.}
+}
+
+@inproceedings{taghibakhshi2021optimization,
+author = {Taghibakhshi, Ali and MacLachlan, Scott and Olson, Luke and West, Matthew},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {M. Ranzato and A. Beygelzimer and Y. Dauphin and P.S. Liang and J. Wortman Vaughan},
+ pages = {12129--12140},
+ publisher = {Curran Associates, Inc.},
+ title = {Optimization-Based Algebraic Multigrid Coarsening Using Reinforcement Learning},
+ url = {https://proceedings.neurips.cc/paper_files/paper/2021/file/6531b32f8d02fece98ff36a64a7c8260-Paper.pdf},
+ volume = {34},
+ year = {2021},
+  abstract={Large sparse linear systems of equations are ubiquitous in science and engineering, such as those arising from discretizations of partial differential equations. Algebraic multigrid (AMG) methods are one of the most common methods of solving such linear systems, with an extensive body of underlying mathematical theory. A system of linear equations defines a graph on the set of unknowns and each level of a multigrid solver requires the selection of an appropriate coarse graph along with restriction and interpolation operators that map to and from the coarse representation. The efficiency of the multigrid solver depends critically on this selection and many selection methods have been developed over the years. Recently, it has been demonstrated that it is possible to directly learn the AMG interpolation and restriction operators, given a coarse graph selection. In this paper, we consider the complementary problem of learning to coarsen graphs for a multigrid solver, a necessary step in developing fully learnable AMG methods. We propose a method using a reinforcement learning (RL) agent based on graph neural networks (GNNs), which can learn to perform graph coarsening on small planar training graphs and then be applied to unstructured large planar graphs, assuming bounded node degree. We demonstrate that this method can produce better coarse graphs than existing algorithms, even as the graph size increases and other properties of the graph are varied. We also propose an efficient inference procedure for performing graph coarsening that results in linear time complexity in graph size.}
+}
+
+@inproceedings{sedaghati2015automatic,
+  title={Automatic selection of sparse matrix representation on GPUs},
+  author={Sedaghati, Naser and Mu, Te and Pouchet, Louis-Noel and Parthasarathy, Srinivasan and Sadayappan, Ponnuswamy},
+  booktitle={Proceedings of the 29th ACM on International Conference on Supercomputing},
+  pages={99--108},
+  year={2015},
+  doi = {10.1145/2751205.2751244},
+  series = {ICS '15},
+  isbn = {9781450335591},
+  publisher = {Association for Computing Machinery},
+  abstract={Sparse matrix-vector multiplication (SpMV) is a core kernel in numerous applications, ranging from physics simulation and large-scale solvers to data analytics. Many GPU implementations of SpMV have been proposed, targeting several sparse representations and aiming at maximizing overall performance. No single sparse matrix representation is uniformly superior, and the best performing representation varies for sparse matrices with different sparsity patterns. In this paper, we study the inter-relation between GPU architecture, sparse matrix representation and the sparse dataset. We perform extensive characterization of pertinent sparsity features of around 700 sparse matrices, and their SpMV performance with a number of sparse representations implemented in the NVIDIA CUSP and cuSPARSE libraries. We then build a decision model using machine learning to automatically select the best representation to use for a given sparse matrix on a given target platform, based on the sparse matrix features. Experimental results on three GPUs demonstrate that the approach is very effective in selecting the best representation.}
+}
+
+@inproceedings{yamada2018preconditioner,
+  title={Preconditioner auto-tuning using deep learning for sparse iterative algorithms},
+  author={Yamada, Kenya and Katagiri, Takahiro and Takizawa, Hiroyuki and Minami, Kazuo and Yokokawa, Mitsuo and Nagai, Toru and Ogino, Masao},
+  booktitle={2018 Sixth International Symposium on Computing and Networking Workshops (CANDARW)},
+  doi={10.1109/CANDARW.2018.00055},
+  pages={257--262},
+  year={2018},
+  organization={IEEE},
+abstract={In numerical libraries for sparse matrix operations, there are many tuning parameters related to implementation selection. Selection of different tuning parameters could result in totally different performance. Moreover, optimal implementation depends on the sparse matrices to be operated. It is difficult to find optimal implementation without executing each implementation and thereby examining its performance on a given sparse matrix. In this study, we propose an implementation selection method for sparse iterative algorithms and preconditioners in a numerical library using deep learning. The proposed method uses full color images to represent the features of a sparse matrix. We present an image generation method for partitioning a given matrix (to generate its feature image) so that the value of each matrix element is considered in the implementation selection. We then evaluate the effectiveness of the proposed method by conducting a numerical experiment. In this experiment, the accuracy of implementation selection is evaluated. The training data comprise a pair of sparse matrix and its optimal implementation. The optimal implementation of each sparse matrix in the training data is obtained in advance by executing every implementation and getting the best one. The experimental results obtained using the proposed method show that the accuracy of selecting the optimal implementation of each sparse matrix is 79.5\%.},
+
+
+}
+
+@article{Davis2016ASO,
+  title={A survey of direct methods for sparse linear systems},
+  DOI={10.1017/S0962492916000076}, 
+  journal={Acta Numerica}, 
+  publisher={Cambridge University Press}, 
+  author={Davis, Timothy A. and Rajamanickam, Sivasankaran and Sid-Lakhdar, Wissam M.}, 
+  year={2016}, 
+  pages={383–566},
+}
+
+@article{Li2015PerformanceAA,
+  title={Performance Analysis and Optimization for SpMV on GPU Using Probabilistic Modeling},
+  author={Li, Kenli and Yang, Wangdong and Li, Keqin},
+  journal={IEEE Transactions on Parallel and Distributed Systems},
+  year={2015},
+  volume={26},
+  number={1},
+  pages={196-205},
+  doi={10.1109/TPDS.2014.2308221},
+  abstract={This paper presents a unique method of performance analysis and optimization for sparse matrix-vector multiplication (SpMV) on GPU. This method has wide adaptability for different types of sparse matrices and is different from existing methods which only adapt to some particular sparse matrices. In addition, our method does not need additional benchmarks to get optimized parameters, which are calculated directly through the probability mass function (PMF). We make the following contributions. (1) We present a PMF to analyze precisely the distribution pattern of non-zero elements in a sparse matrix. The PMF can provide theoretical basis for the compression of a sparse matrix. (2) Compression efficiency of COO, CSR, ELL, and HYB can be analyzed precisely through the PMF, and combined with the hardware parameters of GPU, the performance of SpMV based on COO, CSR, ELL, and HYB can be estimated. Furthermore, the most appropriate format for SpMV can be selected according to estimated value of the performance. Experiments prove that the theoretical estimated values and the tested values have high consistency. (3) For HYB, the optimal segmentation threshold can be found through the PMF to achieve the optimal performance for SpMV. Our performance modeling and analysis are very accurate. The order of magnitude of the estimated speedup and that of the tested speedup for each of the ten tested sparse matrices based on the three formats COO, CSR, and ELL are the same. The percentage of relative difference between an estimated value and a tested value is less than 20 percent for over 80 percent cases. The performance improvement of our algorithm is also effective. The average performance improvement of the optimal solution for HYB is over 15 percent compared with that of the automatic solution provided by CUSPARSE lib.}
+}
+
+@article{Li2021AdaptiveSO,
+  title={Adaptive SpMV/SpMSpV on GPUs for Input Vectors of Varied Sparsity},
+  author={Min Li and Yulong Ao and Chao Yang},
+  journal={IEEE Transactions on Parallel and Distributed Systems},
+  year={2021},
+  volume={32},
+  number={7},
+  pages={1842-1853},
+  doi={10.1109/TPDS.2020.3040150},
+  abstract={Despite numerous efforts for optimizing the performance of Sparse Matrix and Vector Multiplication (SpMV) on modern hardware architectures, few works are done to its sparse counterpart, Sparse Matrix and Sparse Vector Multiplication (SpMSpV), not to mention dealing with input vectors of varied sparsity. The key challenge is that depending on the sparsity levels, distribution of data, and compute platform, the optimal choice of SpMV/SpMSpV kernel can vary, and a static choice does not suffice. In this article, we propose an adaptive SpMV/SpMSpV framework, which can automatically select the appropriate SpMV/SpMSpV kernel on GPUs for any sparse matrix and vector at the runtime. Based on systematic analysis on key factors such as computing pattern, workload distribution and write-back strategy, eight candidate SpMV/SpMSpV kernels are encapsulated into the framework to achieve high performance in a seamless manner. A comprehensive study on machine learning-based kernel selector is performed to choose the kernel and adapt with the varieties of both the input and hardware from both accuracy and overhead perspectives. Experiments demonstrate that the adaptive framework can substantially outperform the previous state-of-the-art in real-world applications on NVIDIA Tesla K40m, P100, and V100 GPUs.}
+}
+
+
+@article{Meijerink1977AnIS,
+  title={An iterative solution method for linear systems of which the coefficient matrix is a symmetric {M-matrix}},
+  author={Jan A. Meijerink and Henk A. van der Vorst},
+  journal={Mathematics of Computation},
+  year={1977},
+  volume={31},
+  pages={148-162},
+  abstract={A particular class of regular splittings of not necessarily symmetric M-matrices is proposed. If the matrix is symmetric, this splitting is combined with the conjugate-gradient method to provide a fast iterative solution algorithm. Comparisons have been made with other well-known methods. In all test problems the new combination was faster than the other methods.}
+}
+
+@article{Rawat2017DeepCN,
+  title={Deep Convolutional Neural Networks for Image Classification: A Comprehensive Review},
+  author={Rawat, Waseem and Wang, Zenghui},
+  journal={Neural Computation}, 
+  year={2017},
+  volume={29},
+  number={9},
+  pages={2352-2449},
+  doi={10.1162/neco_a_00990},
+  abstract={Convolutional neural networks (CNNs) have been applied to visual tasks since the late 1980s. However, despite a few scattered applications, they were dormant until the mid-2000s when developments in computing power and the advent of large amounts of labeled data, supplemented by improved algorithms, contributed to their advancement and brought them to the forefront of a neural network renaissance that has seen rapid progression since 2012. In this review, which focuses on the application of CNNs to image classification tasks, we cover their development, from their predecessors up to recent state-of-the-art deep learning systems. Along the way, we analyze (1) their early successes, (2) their role in the deep learning renaissance, (3) selected symbolic works that have contributed to their recent popularity, and (4) several improvement attempts by reviewing contributions and challenges of over 300 publications. We also introduce some of their current trends and remaining challenges.}
+}
+
+@INPROCEEDINGS{Zhang2011AQP,
+  title={A quantitative performance analysis model for GPU architectures},
+author={Zhang, Yao and Owens, John D.},
+ booktitle={2011 IEEE 17th International Symposium on High Performance Computer Architecture}, 
+  year={2011},
+  pages={382-393},
+ doi={10.1109/HPCA.2011.5749745},
+  abstract={We develop a microbenchmark-based performance model for NVIDIA GeForce 200-series GPUs. Our model identifies GPU program bottlenecks and quantitatively analyzes performance, and thus allows programmers and architects to predict the benefits of potential program optimizations and architectural improvements. In particular, we use a microbenchmark-based approach to develop a throughput model for three major components of GPU execution time: the instruction pipeline, shared memory access, and global memory access. Because our model is based on the GPU's native instruction set, we can predict performance with a 5 - 15\% error. To demonstrate the usefulness of the model, we analyze three representative real-world and already highly-optimized programs: dense matrix multiply, tridiagonal systems solver, and sparse matrix vector multiply. The model provides us detailed quantitative analysis on performance, allowing us to understand the configuration of the fastest dense matrix multiply implementation and to optimize the tridiagonal solver and sparse matrix vector multiply by 60\% and 18\% respectively. Furthermore, our model applied to analysis on these codes allows us to suggest architectural improvements on hardware resource allocation, avoiding bank conflicts, block scheduling, and memory transaction granularity.}
+}
+
+@techreport{bell2008efficient,
+  title={Efficient sparse matrix-vector multiplication on CUDA},
+  author={Bell, Nathan and Garland, Michael},
+  year={2008},
+  institution={Nvidia Technical Report NVR-2008-004, Nvidia Corporation}
+}
+
+@Article{benzi2002preconditioning,
+  author  = {Michele Benzi},
+  title   = {Preconditioning {T}echniques for {L}arge {L}inear {S}ystems: {A S}urvey},
+  journal = {Journal of Computational Physics},
+  year    = {2002},
+  volume  = {182},
+  number  = {2},
+  pages   = {418-477},
+  doi     = {10.1006/jcph.2002.7176},
+  abstract = {This article surveys preconditioning techniques for the iterative solution of large linear systems, with a focus on algebraic methods suitable for general sparse matrices. Covered topics include progress in incomplete factorization methods, sparse approximate inverses, reorderings, parallelization issues, and block and multilevel extensions. Some of the challenges ahead are also discussed. An extensive bibliography completes the paper.}
+}
+
+@article{falch2017machine,
+  title={Machine learning-based auto-tuning for enhanced performance portability of {OpenCL} applications},
+  author={Falch, Thomas L. and Elster, Anne C.},
+  journal={Concurrency and Computation: Practice and Experience},
+  volume={29},
+  number={8},
+  pages={e4029},
+  doi={10.1002/cpe.4029},
+  year={2017},
+  publisher={Wiley Online Library},
+  url = {https://onlinelibrary.wiley.com/doi/abs/10.1002/cpe.4029},
+  note = {e4029 cpe.4029},
+  abstract={Heterogeneous computing, combining devices with different architectures such as CPUs and GPUs, is rising in popularity and promises increased performance combined with reduced energy consumption. OpenCL has been proposed as a standard for programming such systems and offers functional portability. However, it suffers from poor performance portability, because applications must be retuned for every new device. In this paper, we use machine learning‐based auto‐tuning to address this problem. Benchmarks are run on a random subset of the tuning parameter spaces, and the results are used to build a machine learning‐based performance model. The model can then be used to find interesting subspaces for further search. We evaluate our method using five image processing benchmarks, with tuning parameter space sizes up to 2.3 M, using different input sizes, on several devices, including an Intel i7 4771 (Haswell) CPU, an Nvidia Tesla K40 GPU, and an AMD Radeon HD 7970 GPU. We compare different machine learning algorithms for the performance model. Our model achieves a mean relative error as low as 3.8\% and is able to find solutions on average only 0.29\% slower than the best configuration in some cases, evaluating less than 1.1\% of the search space. The source code of our framework is available at https://github.com/acelster/ML‐autotuning.},
+}
+
+@article{gasparini21HybridParallelIterativeSparseLinearSolverFramework,
+title = {Hybrid parallel iterative sparse linear solver framework for reservoir geomechanical and flow simulation},
+journal = {Journal of Computational Science},
+volume = {51},
+pages = {101330},
+year = {2021},
+issn = {1877-7503},
+doi = {10.1016/j.jocs.2021.101330},
+author = {Leonardo Gasparini and José R.P. Rodrigues and Douglas A. Augusto and Luiz M. Carvalho and Cesar Conopoima and Paulo Goldfeld and Jairo Panetta and João P. Ramirez and Michael Souza and Mateus O. Figueiredo and Victor M.D.M. Leite},
+abstract = {We discuss new developments of a hybrid parallel iterative sparse linear solver framework focused on petroleum reservoir flow and geomechanical simulation. It runs efficiently on several platforms, from desktop workstations to clusters of multicore nodes, with or without multiple GPUs, using a two-tier hierarchical architecture for distributed matrices and vectors. Results show good parallel scalability. Comparisons with a well-established library and a proprietary commercial solver indicate that our solver is competitive with the best available tools. We present the results of the solver's application to simulations of real and synthetic reservoir models of up to billions of unknowns, running on CPUs and GPUs on up to 2000 processes.}
+}
+
+@incollection{guyon2006introduction,
+  title={An introduction to feature extraction},
+  author={Guyon, Isabelle and Elisseeff, Andr{\'e}},
+  booktitle={Feature extraction: foundations and applications},
+  year={2006},
+  publisher={Springer Berlin Heidelberg},
+  address={Berlin, Heidelberg},
+  pages={1--25},
+  abstract={This chapter introduces the reader to the various aspects of feature extraction covered in this book. Section 1 reviews definitions and notations and proposes a unified view of the feature extraction problem. Section 2 is an overview of the methods and results presented in the book, emphasizing novel contributions. Section 3 provides the reader with an entry point in the field of feature extraction by showing small revealing examples and describing simple but effective algorithms. Finally, Section 4 introduces a more theoretical formalism and points to directions of research and open problems.},
+  isbn={978-3-540-35488-8},
+  doi={10.1007/978-3-540-35488-8_1},
+  url={10.1007/978-3-540-35488-8_1}
+}
+@article{memeti2019using,
+  title={Using meta-heuristics and machine learning for software optimization of parallel computing systems: a systematic literature review},
+  author={Memeti, Suejb and Pllana, Sabri and Binotto, Al{\'e}cio and Ko{\l}odziej, Joanna and Brandic, Ivona},
+  journal={Computing},
+  volume={101},
+  number= {8},
+  pages={893--936},
+  year={2019},
+  publisher={Springer},
+  url = {10.1007/s00607-018-0614-9},
+  abstract={While modern parallel computing systems offer high performance, utilizing these powerful computing resources to the highest possible extent demands advanced knowledge of various hardware architectures and parallel programming models. Furthermore, optimized software execution on parallel computing systems demands consideration of many parameters at compile-time and run-time. Determining the optimal set of parameters in a given execution context is a complex task, and therefore to address this issue researchers have proposed different approaches that use heuristic search or machine learning. In this paper, we undertake a systematic literature review to aggregate, analyze and classify the existing software optimization methods for parallel computing systems. We review approaches that use machine learning or meta-heuristics for software optimization at compile-time and run-time. Additionally, we discuss challenges and future research directions. The results of this study may help to better understand the state-of-the-art techniques that use machine learning and meta-heuristics to deal with the complexity of software optimization for parallel computing systems. Furthermore, it may aid in understanding the limitations of existing approaches and identification of areas for improvement.},
+}
+
+@article{saad1994ilut,
+  title={ILUT: A dual threshold incomplete LU factorization},
+  author={Saad, Yousef},
+  journal={Numerical linear algebra with applications},
+  volume={1},
+  number={4},
+  pages={387--402},
+  year={1994},
+  doi={ 10.1002/nla.1680010405},
+  publisher={Wiley Online Library},
+  abstract ={In this paper we describe an Incomplete LU factorization technique based on a strategy which combines two heuristics. This ILUT factorization extends the usual ILU(0) factorization without using the concept of level of fill-in. There are two traditional ways of developing incomplete factorization preconditioners. The first uses a symbolic factorization approach in which a level of fill is attributed to each fill-in element using only the graph of the matrix. Then each fill-in that is introduced is dropped whenever its level of fill exceeds a certain threshold. The second class of methods consists of techniques derived from modifications of a given direct solver by including a dropoff rule, based on the numerical size of the fill-ins introduced, traditionally referred to as threshold preconditioners. The first type of approach may not be reliable for indefinite problems, since it does not consider numerical values. The second is often far more expensive than the standard ILU(0). The strategy we propose is a compromise between these two extremes.},
+}
+
+@Inbook{scott2023introduction,
+author="Scott, Jennifer
+and T{\r{u}}ma, Miroslav",
+title="An Introduction to Sparse Matrices",
+bookTitle="Algorithms for Sparse Linear Systems",
+year="2023",
+publisher="Springer International Publishing",
+address="Cham",
+pages="1--18",
+abstract="Consider the simple matrix A on the left in Figure 1.1. Many of its entries are zero (and so are omitted). This is an example of a sparse matrix. The problem we are interested in is that of solving linear systems of equations Ax{\thinspace}={\thinspace}b, where the square sparse matrix A and the vector b are given and the solution vector x is required. Such systems arise in a huge range of practical applications, including in areas as diverse as quantum chemistry, computer graphics, computational fluid dynamics, power networks, machine learning, and optimization. The list is endless and constantly growing, together with the sizes of the systems. For efficiency and to enable large systems to be solved, the sparsity of A must be exploited and operations with the zero entries avoided. To achieve this, sophisticated algorithms are required.",
+isbn="978-3-031-25820-6",
+doi="10.1007/978-3-031-25820-6_1",
+}
+
+@incollection{stuben2001AReview,
+title = {A review of algebraic multigrid},
+editor = {C. Brezinski and L. Wuytack},
+booktitle = {Numerical Analysis: Historical Developments in the 20th Century},
+publisher = {Elsevier},
+address = {Amsterdam},
+pages = {331-359},
+year = {2001},
+isbn = {978-0-444-50617-7},
+doi = {10.1016/B978-0-444-50617-7.50015-X},
+url = {https://www.sciencedirect.com/science/article/pii/B978044450617750015X},
+author = {Klaus Stüben},
+keywords = {Algebraic multigrid},
+abstract = {Since the early 1990s, there has been a strongly increasing demand for more efficient methods to solve large sparse, unstructured linear systems of equations. For practically relevant problem sizes, classical one-level methods had already reached their limits and new hierarchical algorithms had to be developed in order to allow an efficient solution of even larger problems. This paper gives a review of the first hierarchical and purely matrix-based approach, algebraic multigrid (AMG). AMG can directly be applied, for instance, to efficiently solve various types of elliptic partial differential equations discretized on unstructured meshes, both in 2D and 3D. Since AMG does not make use of any geometric information, it is a “plug-in” solver which can even be applied to problems without any geometric background, provided that the underlying matrix has certain properties.}
+}
+
+@InProceedings{tuncer2017diagnosing,
+author={Tuncer, Ozan
+and Ates, Emre
+and Zhang, Yijia
+and Turk, Ata
+and Brandt, Jim
+and Leung, Vitus J.
+and Egele, Manuel
+and Coskun, Ayse K.},
+editor={Kunkel, Julian M.
+and Yokota, Rio
+and Balaji, Pavan
+and Keyes, David},
+title={Diagnosing Performance Variations in {HPC} Applications Using Machine Learning},
+booktitle={High Performance Computing: 32nd International Conference, ISC High Performance 2017, Frankfurt, Germany, June 18--22, 2017, Proceedings 32},
+year={2017},
+publisher={Springer International Publishing},
+pages={355--373},
+abstract={With the growing complexity and scale of high performance computing (HPC) systems, application performance variation has become a significant challenge in efficient and resilient system management. Application performance variation can be caused by resource contention as well as software- and firmware-related problems, and can lead to premature job termination, reduced performance, and wasted compute platform resources. To effectively alleviate this problem, system administrators must detect and identify the anomalies that are responsible for performance variation and take preventive actions. However, diagnosing anomalies is often a difficult task given the vast amount of noisy and high-dimensional data being collected via a variety of system monitoring infrastructures.},
+isbn={978-3-319-58667-0}
+}
+
+@TechReport{petsc-web-page,
+  author	= {Satish Balay and Shrirang Abhyankar and Mark~F. Adams and Steven Benson and Jed
+		  Brown and Peter Brune and Kris Buschelman and Emil Constantinescu and Lisandro
+		  Dalcin and Alp Dener and Victor Eijkhout and Jacob Faibussowitsch and William~D.
+		  Gropp and V\'{a}clav Hapla and Tobin Isaac and Pierre Jolivet and Dmitry Karpeev
+		  and Dinesh Kaushik and Matthew~G. Knepley and Fande Kong and Scott Kruger and
+		  Dave~A. May and Lois Curfman McInnes and Richard Tran Mills and Lawrence Mitchell
+		  and Todd Munson and Jose~E. Roman and Karl Rupp and Patrick Sanan and Jason Sarich
+		  and Barry~F. Smith and Stefano Zampini and Hong Zhang and Hong Zhang and Junchao
+		  Zhang},
+  title		= {{PETSc/TAO} Users Manual},
+  institution	= {Argonne National Laboratory},
+  number	= {ANL-21/39 - Revision 3.20},
+  doi		= {10.2172/1968587},
+  year		= {2023}
+}
+
+@inproceedings{gaganis2012machine,
+    author = {Gaganis, Vassilis  and Varotsis, Nikos },
+    title = {Machine Learning Methods to Speed up Compositional Reservoir Simulation},
+    booktitle = {SPE Europec featured at EAGE Conference and Exhibition},
+    pages = {SPE-154505-MS},
+    year = {2012},
+    month = {06},
+    doi = {10.2118/154505-MS},
+    eprint = {https://onepetro.org/SPEEURO/proceedings-pdf/12EURO/All-12EURO/SPE-154505-MS/1612365/spe-154505-ms.pdf},
+    abstract = {Compositional reservoir simulation is the most powerful tool available to the reservoir engineer upon which, nowadays, most reservoir development decisions rely on. According to the number of components used to describe the fluids, there is a very high demand for computational power due to the complexity and to the iterative nature of the phase behavior problem solution process. Phase stability and phase split computations often consume more than 50\% of the simulation's total CPU time as both problems need to be solved repeatedly for each discretization block at each iteration of the non-linear solver. Therefore, the speeding up of these calculations is a challenge of great interest. In this work, machine learning methods are proposed for the solving of the phase equilibrium problem. It is shown that by using proper transformations, the unknown closed-form solution of the Equation-of-State based formulation can be emulated by proxy models. The phase stability problem is treated by classifiers which label the fluid's state in each block as either stable or unstable. For the phase-split problem, regression models provide the prevailing equilibrium coefficients values given the feed composition, pressure and temperature. The development of both models is performed rapidly and offline in an automated way, by utilizing the fluid's tuned-EoS model, prior to running the reservoir simulator. During the simulation run, the proxy models are called to provide direct answers of the phase equilibrium problem at a very small CPU charge instead of solving iteratively the phase behavior problem.The proposed approach is presented in two-phase equilibria formulation but it can be extended to multi-phase equilibria applications. Examples demonstrate the accuracy of the calculations and the very significant CPU time reduction achieved with respect to currently used methods.},
+}
+
+@misc{ImagePrecGitHub,
+  author = {Souza, Michael},
+  title = {Dataset: Image and Scalar-Based Approaches in Preconditioner Selection},
+  year = {2023},
+  url = {https://github.com/michaelsouza/imageprec/blob/main/README.md},
+  note = {GitHub repository},
+  urldate = {2023-10-26T18:20:10},
+}
 @book{Boldrini,
     author = {Boldrini, J. L. and Costa, S. I. R. and Figueiredo, V. L. and Wetzler, H. G.},
     title = {Álgebra Linear}, 
