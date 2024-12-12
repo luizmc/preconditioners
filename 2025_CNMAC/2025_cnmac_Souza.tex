@@ -51,7 +51,7 @@
 \DefineBibliographyStrings{brazil}{mathesis = {Disserta\c{c}\~{a}o de mestrado}}
 \DefineBibliographyStrings{english}{mathesis = {Master dissertation}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+\usepackage{booktabs}
 
 \begin{document}
 {}{\
@@ -138,7 +138,7 @@ uma aproximação multinível do sistema \cite{stuben2001AReview}. Dependendo do
 de esparsidade, até mesmo métodos diretos podem ser aplicáveis para resolver 
 problemas esparsos \cite{Davis2016ASO}.
 
-Neste trablho, exploramos técnicas de aprendizagem profunda (DL) para obter 
+Neste trabalho, exploramos técnicas de aprendizagem profunda (DL) para obter 
 automaticamente representações compactas de matrizes esparsas para selecionar 
 precondicionadores. Ampliando a abordagem de Yamada et al. \cite{yamada2018preconditioner}, 
 usamos imagens RGB para codificar espacialmente os padrões de esparsidade, 
@@ -179,7 +179,8 @@ conclui o artigo, destacando sua importância e sugerindo futuras direções de 
 O potencial da aprendizagem profunda (DL) para discernir padrões complexos e 
 facilitar a tomada de decisões orientada por dados foi reconhecido 
 como uma solução eficaz para vários desafios na computação de alto desempenho 
-aplicada à solução de sistemas lineares \cite{falch2017machine,tuncer2017diagnosing,memeti2019using}.
+aplicada à solução de sistemas lineares 
+\cite{falch2017machine,tuncer2017diagnosing,memeti2019using}.
 
 Uma área de aplicação da DL é a seleção automática da estrutura de dados 
 para o armazenamento de matrizes esparsas. Sedaghati et al. \cite{sedaghati2015automatic}
@@ -222,6 +223,49 @@ seu potencial na seleção de precondicionadores merece ser mais explorado.
 Este trabalho é uma contribuição nessa direção.
 
 \section{Metodologia}\label{sec:method}
+
+Propomos codificar a esparsidade da matriz e alguns atributos facilmente 
+computáveis como imagens RGB. Essa representação geométrica é uma descrição compacta 
+e adequada da estrutura da matriz subjacente. Para comprovar essa afirmação, 
+realizamos experimentos comparando modelos de DL treinados em atributos de 
+matriz escalar com aqueles treinados em imagens. Em ambos os cenários, o 
+objetivo principal é a seleção ideal de precondicionadores para minimizar o tempo de 
+convergência dos solucionadores lineares.
+
+Para este estudo, empregamos 126 matrizes simétricas, 
+não diagonais e com  positivo-definidas da SuiteSparse Matrix Collection usando a
+ biblioteca \texttt{ssgetpy} \cite{kolodziej2019suitesparse,ssgetpy}. 
+
+Neste estudo, empregamos um conjunto de parâmetros escalares para caracterizar 
+as matrizes, conforme delineado na Tabela \ref{tab:scalar_features}.
+ Entre esses parâmetros, o número da condicionamento foi calculado usando a 
+ função \texttt{condest} do MATLAB, enquanto os menores e maiores autovalores 
+foram obtidos por meio da função \texttt{eigs} com as opções \texttt{smallestabs} e 
+\texttt{largestabs}, respectivamente \cite{matlab}. 
+Embora o número de condicionamento e os autovalores sejam informativos, 
+eles são computacionalmente caros. Em contrapartida, 
+nossa abordagem baseada em imagens oferece uma alternativa igualmente informativa, porém mais eficiente.
+
+\begin{table}
+    \centering
+    \caption{Scalar Features.}
+    \label{tab:scalar_features}
+\begin{tabular}{@{}p{2cm}p{9cm}@{}}
+    \toprule
+    \textbf{Features} &  \multicolumn{1}{c}{\textbf{Definition}} \\
+    \midrule
+    Density & Number of non-zero elements divided by the total number of elements. \\
+    N& Number of rows. \\
+    NNZ & Number of nonzero elements. \\
+    RowNNZ & Average number of nonzero elements per row. \\
+    Condest & Estimate of the 1-norm condition number of the matrix. \\
+    MinEigs & Estimate of the smallest eigenvalue of the matrix. \\
+    MaxEigs & Estimate of the largest eigenvalue of the matrix. \\
+    DDom & Percentage of the rows diagonally dominated. If $D$ is the diagonal matrix extracted from $A$, $B = A - D$, $S = \{ i: |D_{ii}| > \sum_j{|B_{ij}|}\}$, then $\text{DDom} = \frac{|S|}{N}.$\\
+    DDeg & Minimal ratio between the absolute value of the diagonal element and the sum of the non-diagonal entries. $\text{DDeg} = \min_{i}\frac{|D_{ii}|}{\sum_j{|B_{ij}|}}$.\\
+     \bottomrule
+\end{tabular}
+\end{table}
 \section{Resultados}\label{sec:results}
 \section{Conclusões}\label{sec:conclusions}
 
