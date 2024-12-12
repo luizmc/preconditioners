@@ -52,6 +52,7 @@
 \DefineBibliographyStrings{english}{mathesis = {Master dissertation}}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{booktabs}
+\usepackage{adjustbox}
 
 \begin{document}
 {}{\
@@ -64,7 +65,7 @@
 \author{
     {\large Michael Souza}\thanks{michael@ufc.br}, {\small UFC, Fortaleza, CE},  {\large Luiz Mariano Carvalho}\thanks{luizmc@ime.uerj.br}, {\small  UERJ, Rio de Janeiro, RJ}, \\
     {\large Douglas Augusto}\thanks{daa@fiocruz.br}, {\small FOC, Rio de Janeiro, RJ }, {\large Jairo Panetta}\thanks{jairo.panetta@gmail.com}, {\small ITA, São José dos Campos, SP}, \\
-    {\large Paulo Goldfeld}\thanks{goldfeld@matematica.ufrj.br}, {\small UFRJ, Rio de Janeiro, RJ}, {\large José R. P. Rodrigues}\thanks{jrprodrigues@petrobras.com.br}, {\small CENPES/Petrobras, Rio de Janeiro, RJ} \\
+    {\large Paulo Goldfeld}\thanks{goldfeld@matematica.ufrj.br}, {\small UFRJ, Rio de Janeiro, RJ}, {\large José R. P. Rodrigues}\thanks{jrprodrigues@petrobras.com.br}, {\small CENPES/Petrobras}, \\ {\small Rio de Janeiro, RJ} \\
 }
 }
 \criartitulo
@@ -77,14 +78,14 @@
 
 \begin{abstract}
 {\bf Resumo}. Em computação de alto desempenho (HPC), a solução eficiente de grandes sistemas lineares esparsos é fundamental, 
-sendo os métodos iterativos a escolha predominante. No entanto, o desempenho desses métodos está ligado ao precondicionador
+sendo os métodos iterativos a escolha predominante. No entanto, a performance desses métodos está ligada ao precondicionador
  escolhido. A natureza multifacetada das matrizes esparsas
 torna difícil a prescrição universal de precondicionadores. Avançando em metodologias anteriores, esta pesquisa apresenta a representação da esparsidade de uma matrizes
  por meio de imagens RGB. Utilizando uma rede neural convolucional
 (CNN), a tarefa de seleção do precondicionador se transforma em um problema de classificação
 multi-classe. Testes extensivos em 126 matrizes da coleção SuiteSparse enfatizam a
 adequação do modelo CNN, observando um aumento de 32\% na acurácia e uma redução de 25\%
-no tempo computacional.
+no tempo de execução.
 
 \noindent
 {\bf Palavras-chave}. computação de alto desempenho (HPC), sistemas lineares esparsos,  métodos iterativos, escolha de precondicionadores,
@@ -138,7 +139,7 @@ uma aproximação multinível do sistema \cite{stuben2001AReview}. Dependendo do
 de esparsidade, até mesmo métodos diretos podem ser aplicáveis para resolver 
 problemas esparsos \cite{Davis2016ASO}.
 
-Neste trabalho, exploramos técnicas de aprendizagem profunda (DL) para obter 
+Neste trabalho, exploramos técnicas de aprendizagem profunda (AP) para obter 
 automaticamente representações compactas de matrizes esparsas para selecionar 
 precondicionadores. Ampliando a abordagem de Yamada et al. \cite{yamada2018preconditioner}, 
 usamos imagens RGB para codificar espacialmente os padrões de esparsidade, 
@@ -169,6 +170,9 @@ de baixo impacto computacional quando não se escolhe o precondicionador ideal. 
 resultados destacam a eficiência e a eficácia superiores dos modelos baseados em imagens.  
 \end{description}
 
+Esta contribuição resume um trabalho em desenvolvimento que 
+se encontra disponível em \cite{souza2023}; vários detalhes omitidos aqui, 
+dado o limite do número de páginas, podem ser encontrados neste trabalho.
 O restante deste artigo está assim estruturado: a Seção \ref{sec:related} 
 analisa a literatura relevante, a Seção \ref{sec:method} descreve nossa metodologia, 
 a Seção \ref{sec:results} discute os resultados empíricos e a Seção \ref{sec:conclusions} 
@@ -176,13 +180,13 @@ conclui o artigo, destacando sua importância e sugerindo futuras direções de 
 
 \section{Trabalhos relacionados}\label{sec:related}
 
-O potencial da aprendizagem profunda (DL) para discernir padrões complexos e 
+O potencial da aprendizagem profunda (AP) para discernir padrões complexos e 
 facilitar a tomada de decisões orientada por dados foi reconhecido 
 como uma solução eficaz para vários desafios na computação de alto desempenho 
 aplicada à solução de sistemas lineares 
 \cite{falch2017machine,tuncer2017diagnosing,memeti2019using}.
 
-Uma área de aplicação da DL é a seleção automática da estrutura de dados 
+Uma área de aplicação da AP é a seleção automática da estrutura de dados 
 para o armazenamento de matrizes esparsas. Sedaghati et al. \cite{sedaghati2015automatic}
 usaram algoritmos de árvore de decisão para automatizar a seleção do formato de 
 armazenamento com base nas propriedades da matriz. Nisa et al. \cite{nisa2018effective} 
@@ -192,13 +196,13 @@ de armazenamento com a eficiência computacional também é destacada na pesquis
 Barreda et al. \cite{barreda2020performance} e Cui et al. \cite{cui2016code} 
 que exploram melhorias de desempenho em diferentes plataformas de computação.
 
-Outra aplicação de DL notável envolve (\emph{autoajuste}) de solvers lineares. 
+Outra aplicação de AP notável envolve (\emph{autoajuste}) de solvers lineares. 
 Por exemplo, Peairs e Chen \cite{peairs2011using} utilizaram uma estratégia de 
 aprendizagem por reforço para determinar os parâmetros de reinício ideais para o 
-GMRES. Bhowmick et al. \cite{bhowmick2006application} aplicaram a DL para selecionar 
+GMRES. Bhowmick et al. \cite{bhowmick2006application} aplicaram a AP para selecionar 
 os melhores solvers para sistemas lineares esparsos em tempo de execução, 
 adaptando-se aos dados e à arquitetura computacional disponível. 
-Dufrechou et al. \cite{dufrechou2019automatic} empregaram técnicas de DL 
+Dufrechou et al. \cite{dufrechou2019automatic} empregaram técnicas de AP 
 para prever o solver ideal para um sistema linear específico, concentrando-se 
 em situações em que um número limitado de sistemas triangulares é resolvido para a 
 mesma matriz. 
@@ -206,9 +210,9 @@ Em outra abordagem, Funk et al. \cite{funk2022prediction} apresentaram uma técn
 aprendizagem profunda para identificar o solver iterativo ideal para 
 um determinado sistema linear esparso, obtendo uma acurácia de classificação de 60\%.
 
-Uma tendência crescente na DL é o uso de redes neurais para acelerar os 
+Uma tendência crescente na AP é o uso de redes neurais para acelerar os 
 operações de álgebra linear. Cui et al. \cite{cui2016code} empregaram um sistema de 
-DL para prever a melhor implementação da multiplicação matriz-vetor (SpMV) para uma 
+AP para prever a melhor implementação da multiplicação matriz-vetor (SpMV) para uma 
 determinada matriz. G{\"o}tz e Anzt \cite{gotz2018machine} introduziram 
 uma rede neural convolucional (CNN) para detectar estruturas de blocos em 
 padrões de esparsidade de matriz. Em uma abordagem diferente, 
@@ -218,7 +222,7 @@ rede neural feed-forward como precondicionador. Taghibakhshi et al.
 um agente de aprendizagem por reforço baseado em redes neurais de grafos (GNNs) 
 para construir espaços grosseiros em uma abordagem multigrid. 
 
-Embora a DL tenha otimizado substancialmente vários aspectos da álgebra linear computacional,
+Embora a AP tenha otimizado substancialmente vários aspectos da álgebra linear computacional,
 seu potencial na seleção de precondicionadores merece ser mais explorado. 
 Este trabalho é uma contribuição nessa direção.
 
@@ -227,46 +231,151 @@ Este trabalho é uma contribuição nessa direção.
 Propomos codificar a esparsidade da matriz e alguns atributos facilmente 
 computáveis como imagens RGB. Essa representação geométrica é uma descrição compacta 
 e adequada da estrutura da matriz subjacente. Para comprovar essa afirmação, 
-realizamos experimentos comparando modelos de DL treinados em atributos de 
+realizamos experimentos comparando modelos de AP treinados em atributos de 
 matriz escalar com aqueles treinados em imagens. Em ambos os cenários, o 
 objetivo principal é a seleção ideal de precondicionadores para minimizar o tempo de 
 convergência dos solucionadores lineares.
 
 Para este estudo, empregamos 126 matrizes simétricas, 
-não diagonais e com  positivo-definidas da SuiteSparse Matrix Collection usando a
- biblioteca \texttt{ssgetpy} \cite{kolodziej2019suitesparse,ssgetpy}. 
+não diagonais e positivo-definidas da coleção de matrizes SuiteSparse usando a
+biblioteca \texttt{ssgetpy} \cite{kolodziej2019suitesparse,ssgetpy}. 
 
-Neste estudo, empregamos um conjunto de parâmetros escalares para caracterizar 
-as matrizes, conforme delineado na Tabela \ref{tab:scalar_features}.
- Entre esses parâmetros, o número da condicionamento foi calculado usando a 
- função \texttt{condest} do MATLAB, enquanto os menores e maiores autovalores 
+Empregamos um conjunto de parâmetros escalares para caracterizar 
+as matrizes, ver Tabela \ref{tab:scalar_features}.
+Entre esses parâmetros, o número da condicionamento foi calculado usando a 
+função \texttt{condest} do MATLAB, enquanto os menores e maiores autovalores 
 foram obtidos por meio da função \texttt{eigs} com as opções \texttt{smallestabs} e 
 \texttt{largestabs}, respectivamente \cite{matlab}. 
 Embora o número de condicionamento e os autovalores sejam informativos, 
 eles são computacionalmente caros. Em contrapartida, 
-nossa abordagem baseada em imagens oferece uma alternativa igualmente informativa, porém mais eficiente.
+nossa abordagem baseada em imagens oferece uma alternativa igualmente informativa, 
+porém mais eficiente.
 
 \begin{table}
     \centering
-    \caption{Scalar Features.}
+    \caption{Propriedades Escalares.}
     \label{tab:scalar_features}
 \begin{tabular}{@{}p{2cm}p{9cm}@{}}
     \toprule
-    \textbf{Features} &  \multicolumn{1}{c}{\textbf{Definition}} \\
+    \textbf{Nome} &  \multicolumn{1}{c}{\textbf{Definição}} \\
     \midrule
-    Density & Number of non-zero elements divided by the total number of elements. \\
-    N& Number of rows. \\
-    NNZ & Number of nonzero elements. \\
-    RowNNZ & Average number of nonzero elements per row. \\
-    Condest & Estimate of the 1-norm condition number of the matrix. \\
-    MinEigs & Estimate of the smallest eigenvalue of the matrix. \\
-    MaxEigs & Estimate of the largest eigenvalue of the matrix. \\
-    DDom & Percentage of the rows diagonally dominated. If $D$ is the diagonal matrix extracted from $A$, $B = A - D$, $S = \{ i: |D_{ii}| > \sum_j{|B_{ij}|}\}$, then $\text{DDom} = \frac{|S|}{N}.$\\
-    DDeg & Minimal ratio between the absolute value of the diagonal element and the sum of the non-diagonal entries. $\text{DDeg} = \min_{i}\frac{|D_{ii}|}{\sum_j{|B_{ij}|}}$.\\
-     \bottomrule
+    Densidade & Número de elementos diferentes de zero dividido pelo número total de elementos. \\
+    N& Número de linhas. \\
+    NNZ & Número de elementos diferentes de zero. \\
+    RowNNZ & Número médio de elementos diferentes de zero por linha. \\
+    Condest & Estimativa do número de condicionamento da matriz, com a norma 1. \\
+    MinEigs & Estimativa do menor autovalor da matriz. \\
+    MaxEigs & Estimativa do maior autovalor da matriz. \\
+    DDom & Percentagem das linhas dominadas diagonalmente. Se $D$ for a matriz diagonal extraída de $A$, $B = A - D$, $S = \{ i: |D_{ii}| > \sum_j{|B_{ij}|}\}$, então $\text{DDom} = \frac{|S|}{N}.$\\
+    DDeg & Razão mínima entre o valor absoluto do elemento diagonal e a soma das entradas não diagonais. $\text{DDeg} = \min_{i}\frac{|D_{ii}|}{\sum_j{|B_{ij}|}}$.\\
+    \bottomrule
 \end{tabular}
 \end{table}
-\section{Resultados}\label{sec:results}
+
+A Tabela \ref{tab:scalar_features_summary} apresenta um resumo estatístico de propriedades escalares das matrizes analisadas. 
+Apesar de todas as matrizes serem simétricas e  positivo-definidas (SPD), o menor valor próprio estimado é 
+$-3,60$. Essa contradição decorre da acurácia limitada da função \texttt{eigs}, que pode não calcular com 
+corretamente o menor autovalor para matrizes específicas. 
+Embora o número de condicionamento de uma matriz SPD seja definido por seus autovalores extremos, os atributos que 
+empregamos são estimativas, o que os torna não redundantes.
+\begin{table}
+    \caption{Propriedades das Matrizes.}
+    \label{tab:scalar_features_summary}
+    \begin{adjustbox}{width=\textwidth}
+    \begin{tabular}{lrrrrrrrrr}
+    \toprule
+    & N & NNZ & Densidade & RowNNZ& MaxEigs & MinEigs & Condest & DDom & DDeg \\
+    \midrule
+    \textbf{média} & 4.1E+04& 6.1E+05& 1.1E-02& 2.5E+01& 1.9E+13& 9.6E+07& 1.2E+17& 1.4E-01& 2.0E-01\\
+    \textbf{std} & 1.2E+05& 1.2E+06& 1.8E-02& 3.8E+01& 1.3E+14& 7.3E+08& 9.1E+17& 3.1E-01& 3.6E-01\\
+    \textbf{mín} & 1.0E+02& 5.9E+02& 5.0E-06& 2.9E+00& 9.8E-13& -3.6E+00& 3.6E+00& 0.00& 7.9E-15\\
+    \textbf{25\%} & 1.1E+03& 1.9E+04& 3.8E-04& 6.8E+00& 9.7E+00& 1.5E-04& 4.5E+03& 0.00& 8.5E-04\\
+    \textbf{50\%} & 8.6E+03& 1.3E+05& 3.8E-03& 1.6E+01& 2.9E+04& 2.0E-01& 3.9E+06& 0.00& 4.8E-03\\
+    \textbf{75\%} & 2.9E+04& 5.6E+05& 1.3E-02& 2.6E+01& 5.7E+08& 2.8E+00& 1.5E+09& 2.6E-03& 2.2E-01\\
+    \textbf{máx} & 1.0E+06& 5.5E+06& 9.1E-02& 3.6E+02& 1.1E+15& 5.8E+09& 9.4E+18& 1.0E+00& 1.8E+00\\
+    \bottomrule
+    \end{tabular}
+    \end{adjustbox}
+\end{table}
+
+Para representar visualmente as propriedade da matriz, criamos um conjunto de dados de imagem com base 
+no método proposto por Yamada et al. \cite{yamada2018preconditioner}. Cada matriz \( A \) é particionada 
+em blocos \( A_{ij} \) de dimensão \( b \approx N / m \), em que \( N \) é a dimensão da matriz e $m$ é a 
+resolução da imagem. Esses blocos são representados como pixels \( p_{ij} \) em uma imagem de \( m \times m \) pixels.
+Geramos quatro conjuntos de imagens com \( m \in \{32, 64, 128, 256\}\).
+
+Cada pixel \( p_{ij} \) consiste em três componentes alinhados com os canais RGB: vermelho, verde e azul. 
+O canal vermelho captura a magnitude dos elementos diferentes de zero no bloco da matriz, 
+o azul incorpora as dimensões da matriz e o verde transmite a densidade do bloco. 
+Como resultado, as características distintas de cada matriz são visualmente representadas, 
+com os atributos de cada bloco influenciando a cor do pixel correspondente. 
+
+Denotaremos os canais vermelho, verde e azul do pixel $p_{ij}$ como $R_{ij}$, $G_{ij}$ e $B_{ij}$, respectivamente. 
+O intervalo dos componentes do pixel é limitado de 0 a 255. Essa restrição e a necessidade de 
+uma representação geral de matrizes heterogêneas exigem um esquema de codificação cuidadoso. 
+Agora descrevemos a transformação da matriz em uma imagem:
+
+\begin{description}
+	\item[Canal Azul:] O canal azul tem o mesmo valor para todos os pixels, dado por
+	$$B_{ij} = \left\lfloor\frac{N - N_{\min}}{N_{\max}  - N_{\min}}\times 255\right\rfloor,~i,j=1,\ldots,m,$$
+	em que $N$ é a ordem da matriz, $N_{\min}$ e $N_{\max}$ são as ordens mínima e máxima de todas as matrizes 
+    no conjunto de dados, respectivamente.
+	
+	\item[Canal Verde:] O valor do canal verde, \( G_{ij} \), é a densidade de elementos diferentes de zero 
+    em um determinado bloco de matriz. Ele é definido como:
+\[ G_{ij} = \left\lfloor\frac{NNZ_{ij}}{b^{2}}\times 255\right\rfloor \]
+em que \( \operatorname{NNZ}_{ij} \) representa a contagem de elementos diferentes de zero no bloco
+\( A_{ij} \) e \( b \) denota a ordem do bloco.
+
+	\item[Canal Vermelho:] Para representar a magnitude média dos elementos diferentes de zero 
+    nos blocos de uma matriz esparsa, primeiro ajustamos ou “polarizamos” seus elementos diferentes de zero.  
+    Isso é feito para garantir que todos os valores sejam maiores que zero. Especificamente, 
+    para qualquer elemento diferente de zero \(a\) na matriz \(A\), seu valor enviesado 
+    \(v(a)\) é dado por $v(a) = a - \min(A) + 1,$ em que $\min(A)$ é o elemento mínimo de $A$.
+
+A próxima etapa é calcular a média desses valores enviesados para cada bloco da matriz. 
+Vamos chamar essa média de \( \gamma_{ij} \) para o bloco \(A_{ij}\). Se a diferença entre os valores 
+máximo e mínimo de toda a matriz for igual ou inferior a 255, calcularemos a média dos valores enviesados
+dentro do bloco. Se a diferença for maior que 255, calculamos o logaritmo de base 2 dos valores enviesados
+antes de calcular a média. Esse método lida com eficiência com blocos de valores amplamente variáveis, 
+mudando o foco da magnitude para a ordem de magnitude.
+
+A fórmula é a seguinte:
+\[\gamma_{ij} = \frac{\sum_{a \in A_{ij}} v(a)}{NNZ_{ij}},\]
+quando a diferença entre os valores máximo e mínimo for igual ou inferior a 255, e 
+\[\gamma_{ij} = \frac{\sum_{a \in A_{ij}} \log_2 v(a)}{NNZ_{ij}},\]
+caso contrário.
+
+Por fim, com as médias de bloco em mãos, podemos definir o valor $R_{ij}$ como a 
+normalização da média de bloco com relação ao intervalo geral de médias de bloco, ou seja 
+\[R_{ij} = \left\lfloor \frac{\gamma_{ij} - \min(\gamma)} {\max(\gamma) - \min(\gamma)} \times 255 \right\rfloor\]
+\end{description}
+
+A Figura \ref{fig:matrix_to_image} ilustra a conversão de uma matriz de $20 \times 20$ em 
+uma imagem de $5\times 5$ pixels, com \(m=5\). Aqui, cada pixel na imagem corresponde a um bloco 
+de $4 \times 4$ da matriz.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figuras/figure01}
+    \caption{Representação baseada em imagem de uma matriz de $20 \times 20$. A matriz é dividida em blocos $ 5 \times 5$ e os valores das propriedades são codificados nos canais de cores RGB}.
+    \label{fig:matrix_to_image}entradas
+\end{figure}
+O conjunto completo de dados de imagem pode ser acessado e baixado do repositório do GitHub \cite{ImagePrecGitHub}.
+
+A representação da esparsidade como imagens captura naturalmente as informações topológicas, 
+codificando-as em relações geométricas, que são mais difíceis de serem obtidas com representações escalares. 
+Para destacar a importância dessas nuances geométricas nas representações de imagens, geramos um banco de 
+dados misto que combina atributos escalares e imagens. Nessa variação, as imagens RGB de $m \times m$ pixels 
+foram colocadas em vetores com  $3m^2$ entradas. Concatenamos os vetores achatados com os atributos escalares, 
+combinando assim as duas representações.
+
+Esse processo gerou quatro conjuntos de atributos escalares estendidos, correspondentes a cada 
+$m \in \{32, 64, 128, 256\}$. Para gerenciar o aumento da dimensionalidade e reter os aspectos mais
+informativos desses atributos estendidos, usamos a análise de componentes principais (PCA), 
+capturando 99\% da variação nos dados \cite{guyon2006introduction}.
+
+
+\section{Resultados}\label{sec:results}próprios
 \section{Conclusões}\label{sec:conclusions}
 
 
